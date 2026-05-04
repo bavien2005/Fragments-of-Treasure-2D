@@ -30,3 +30,6 @@ sysinfo.txt
 
 # Unity memory captures
 [Mm]emoryCaptures/
+# Unity Version Control / Plastic SCM
+.plastic/
+ignore.conf
