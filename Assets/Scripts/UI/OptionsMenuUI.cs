@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionsMenuUI : MonoBehaviour
@@ -7,6 +8,8 @@ public class OptionsMenuUI : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
 
     [SerializeField] private GameObject optionMenu;
+
+    [SerializeField] private GameObject obj;
 
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider soundSlider;
@@ -61,5 +64,14 @@ public class OptionsMenuUI : MonoBehaviour
             textSoundVolume.text = ((int)(value * 100)).ToString() + "%";
         }
     }
-   
+
+    public void SetActiveObj(bool check)
+    {
+        if (obj != null)
+        {
+            obj.SetActive(check);
+        }
+    }
+    
+
 }
