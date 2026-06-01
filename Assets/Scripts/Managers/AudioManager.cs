@@ -26,8 +26,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-       backgroundAudio.clip = backSound;
-       backgroundAudio.Play();
+        backgroundAudio.clip = backSound;
+        backgroundAudio.Play();
         LoadVolume();
     }
 
@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
 
     public float GetMusicVolume()
     {
-        return PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY , 0.5f);
+        return PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY, 0.5f);
     }
     public float GetSoundVolume()
     {

@@ -72,6 +72,6 @@ public class OptionsMenuUI : MonoBehaviour
             obj.SetActive(check);
         }
     }
-    
+
 
 }
