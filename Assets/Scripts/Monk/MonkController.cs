@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MonkController : MonoBehaviour
 {
@@ -10,21 +10,51 @@ public class MonkController : MonoBehaviour
     int direction = 1;
     public float changeTime = 3.0f;
     bool broken = true;
+
+    public DialogueController dialogue;
+
+    public Transform player;
+    public float talkDistance = 2f;
+
+    bool hasTalked = false; // để tránh lặp
     private void Awake()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         timer = changeTime;
     }
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        // Lại gần → nói
+        if (distance < talkDistance && !hasTalked)
+        {
+            Debug.Log("Trigger hội thoại");
+
+            broken = false;
+            hasTalked = true;
+
+            dialogue.StartDialogue();
+        }
+
+        // Đi xa → tắt hội thoại
+        if (distance > talkDistance)
+        {
+            if (hasTalked)
+            {
+                dialogue.EndDialogue(); // 🔥 TẮT
+                broken = true;          // NPC đi lại tiếp
+            }
+
+            hasTalked = false;
+        }
+
+        if (!broken) return;
+
         timer -= Time.deltaTime;
-        if(timer < 0)
+        if (timer < 0)
         {
             direction = -direction;
             timer = changeTime;
@@ -52,5 +82,20 @@ public class MonkController : MonoBehaviour
 
         //position.x = position.x + speed*Time.deltaTime;
         Rigidbody2D.MovePosition(position);
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player vào vùng NPC");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player rời NPC");
+        }
     }
 }
