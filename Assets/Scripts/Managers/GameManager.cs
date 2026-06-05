@@ -16,6 +16,6 @@ public class GameManager : MonoBehaviour
     }
     public void LoadLv1Screen()
     {
-        SceneManager.LoadScene("Lv1Screen");
+        SceneManager.LoadScene("BeginScreen");
     }
 }

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lancer_ Up_Attack_Blue
+  m_Name: Lancer_Right_Attack
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1486743630280823639, guid: fe58c1206463e41038c8e61414f84d8e, type: 3}
+      value: {fileID: 6331980819534964110, guid: e9222978b50fc478bac2042c170d401a, type: 3}
     - time: 0.1
-      value: {fileID: -1198247047316955265, guid: fe58c1206463e41038c8e61414f84d8e, type: 3}
+      value: {fileID: 7232042838751349278, guid: e9222978b50fc478bac2042c170d401a, type: 3}
     - time: 0.2
-      value: {fileID: 6051932423378392712, guid: fe58c1206463e41038c8e61414f84d8e, type: 3}
+      value: {fileID: -4157329051755591257, guid: e9222978b50fc478bac2042c170d401a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -48,9 +48,9 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1486743630280823639, guid: fe58c1206463e41038c8e61414f84d8e, type: 3}
-    - {fileID: -1198247047316955265, guid: fe58c1206463e41038c8e61414f84d8e, type: 3}
-    - {fileID: 6051932423378392712, guid: fe58c1206463e41038c8e61414f84d8e, type: 3}
+    - {fileID: 6331980819534964110, guid: e9222978b50fc478bac2042c170d401a, type: 3}
+    - {fileID: 7232042838751349278, guid: e9222978b50fc478bac2042c170d401a, type: 3}
+    - {fileID: -4157329051755591257, guid: e9222978b50fc478bac2042c170d401a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
