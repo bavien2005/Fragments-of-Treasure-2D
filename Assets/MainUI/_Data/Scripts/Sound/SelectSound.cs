@@ -12,5 +12,6 @@ public enum SelectSound
     Combat,
     Attack2,
     MonsterBreath,
-    Victory
+    Victory,
+    ClickBtn
 }
