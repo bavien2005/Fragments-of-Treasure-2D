@@ -51,6 +51,7 @@ public class BossAttack3 : DinoBehaviourScript
         }
     }
 
+
     protected IEnumerator DoWork3()
     {
         this.isWorking3 = true;

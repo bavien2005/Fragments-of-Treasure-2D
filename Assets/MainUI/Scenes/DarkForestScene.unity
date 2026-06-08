@@ -46697,6 +46697,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852521657}
     m_Modifications:
+    - target: {fileID: 2013820508019508061, guid: b3cef7584fb16ef4e905909452ea8604, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3694348766641798855, guid: b3cef7584fb16ef4e905909452ea8604, type: 3}
       propertyPath: m_LocalPosition.x
       value: -46.6
@@ -109949,6 +109953,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 852521657}
     m_Modifications:
+    - target: {fileID: 2013820508019508061, guid: b3cef7584fb16ef4e905909452ea8604, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3694348766641798855, guid: b3cef7584fb16ef4e905909452ea8604, type: 3}
       propertyPath: m_LocalPosition.x
       value: -46.6
@@ -110252,7 +110260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e72bfe7f6814a841967878fd2527661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 2
+  sceneName: 6
   playerPos: {x: -5, y: -5.5}
   playerStorage: {fileID: 11400000, guid: 4ef9d6e9f16e277449e42a6155d83420, type: 2}
   playerHpSO: {fileID: 11400000, guid: a4e18a171d79bc4478c152d439d66619, type: 2}
