@@ -15,7 +15,7 @@ public class PlayerMovement : PlayerAbstract
     protected override void Start()
     {
         base.Start();
-        transform.parent.position = currentPlayer.intialValue;
+     //   transform.parent.position = currentPlayer.intialValue;
     }
     protected override void LoadComponent()
     {
