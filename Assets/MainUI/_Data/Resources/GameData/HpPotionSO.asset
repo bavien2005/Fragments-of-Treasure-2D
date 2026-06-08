@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6fb84b6f921214988619a99c28e90f, type: 3}
   m_Name: HpPotionSO
   m_EditorClassIdentifier: 
-  hpPotionCount: 35
+  hpPotionCount: 3

@@ -5,5 +5,7 @@ public enum SceneName
     InsideCave,
     LastWar,
     RecusePrincess,
-    MainMenu
+    MainMenu,
+    BeginScreen,
+    islandScene
 }

@@ -24051,7 +24051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1788808709}
-  sceneName: 0
+  sceneName: 6
   arrowSO: {fileID: 11400000, guid: 68c0353608abde7469a18d805178d1a1, type: 2}
   hpPotionSO: {fileID: 11400000, guid: 7426aa12556e1674a8b8eb19e22f4ea6, type: 2}
   inventorySO: {fileID: 11400000, guid: 42ad857aad3df0e4da2026c9eb5856f5, type: 2}

@@ -60,6 +60,7 @@ public class EnemyLancerBlue : MonoBehaviour
         else if (dist > attackNonDistance)
         {
             state = EnemyState.Patrol;
+            animator.SetBool("Attack", false);
         }
 
         // ===== TARGET =====
@@ -121,13 +122,36 @@ public class EnemyLancerBlue : MonoBehaviour
         animator.SetFloat("Look X", attackDir.x);
         animator.SetFloat("Look Y", attackDir.y);
 
-        animator.SetTrigger("Attack");
+        animator.SetBool("Attack", true);
 
         isAttacking = true;
         //lastAttackTime = Time.time;
     }
 
-    public void AttackPlayer() // gọi bằng Animation Event
+    //public void AttackPlayer() // gọi bằng Animation Event
+    //{
+    //    Vector2 attackPos = (Vector2)transform.position + attackDir * attackDistance;
+
+    //    Vector2 boxSize = (attackDir == Vector2.up || attackDir == Vector2.down)
+    //        ? new Vector2(0.5f, 1.5f)
+    //        : new Vector2(1.5f, 0.5f);
+
+    //    Collider2D hit = Physics2D.OverlapBox(attackPos, boxSize, 0f, playerLayer);
+
+    //    if (hit != null)
+    //    {
+    //        Debug.Log("Đâm trúng player!");
+
+    //        PlayerDamReceive player = hit.GetComponentInParent<PlayerDamReceive>();
+
+    //        if (player != null)
+    //        {
+    //            player.Deduct(100);
+
+    //        }
+    //    }
+    //}
+    public void AttackPlayer()
     {
         Vector2 attackPos = (Vector2)transform.position + attackDir * attackDistance;
 
@@ -135,16 +159,16 @@ public class EnemyLancerBlue : MonoBehaviour
             ? new Vector2(0.5f, 1.5f)
             : new Vector2(1.5f, 0.5f);
 
-        Collider2D hit = Physics2D.OverlapBox(attackPos, boxSize, 0f, playerLayer);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPos, boxSize, 0f, playerLayer);
 
-        if (hit != null)
+        foreach (var hit in hits)
         {
-            Debug.Log("Đâm trúng player!");
+            PlayerDamReceive player = hit.GetComponentInParent<PlayerDamReceive>();
 
-            PlayerCtrl playerCtrl = hit.GetComponent<PlayerCtrl>();
-            if (playerCtrl != null)
+            if (player != null)
             {
-                // playerCtrl.TakeDamage(damage);
+                Debug.Log("Đâm trúng player!");
+                player.Deduct(1);
             }
         }
     }

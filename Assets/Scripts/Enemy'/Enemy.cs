@@ -13,9 +13,6 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     public Transform player;
-    int direction = 1;
-    float timer;
-    public float changeTime = 3.0f;
 
     [SerializeField] float attackDistance;
     [SerializeField] float attackNonDistance;
@@ -30,10 +27,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform posA;
     [SerializeField] private Transform posB;
 
-    [SerializeField] private Vector2 firtPosA;
-    [SerializeField] private Vector2 firtPosB;
-    [SerializeField] private Vector2 posTarget;
-    [SerializeField] private Vector2 moveVelocity;
+    private Vector2 firtPosA;
+     private Vector2 firtPosB;
+    private Vector2 posTarget;
+    private Vector2 moveVelocity;
     private DamageReceiver damageReceiver;
 
     [Header("Attack Point")]
@@ -43,7 +40,6 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        //timer = changeTime;
     }
     private void Start()
     {
@@ -62,10 +58,15 @@ public class Enemy : MonoBehaviour
         {
             state = EnemyState.Chase;
             animator.SetTrigger("Attack");
+            if(dist <= 0.05f)
+            {
+                speed = 0;
+            }
         }
         else if (dist > attackNonDistance)
         {
             state = EnemyState.Patrol;
+            speed = 4;
         }
 
         // ===== TARGET =====
@@ -126,11 +127,12 @@ public class Enemy : MonoBehaviour
         foreach (Collider2D hit in hits)
         {
             // thử lấy script Player
-            PlayerCtrl player = hit.GetComponentInParent<PlayerCtrl>();
+            PlayerDamReceive player = hit.GetComponentInParent<PlayerDamReceive>();
 
             if (player != null)
             {
-                player.Anim.SetBool("Hurt", true);
+                Debug.Log("Chem trúng player!");
+                player.Deduct(1);
             }
         }
     }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473aa2cb15503fe4bac32a77be7b1feb, type: 3}
   m_Name: ArrowSO
   m_EditorClassIdentifier: 
-  arrowCounts: 44
+  arrowCounts: 20

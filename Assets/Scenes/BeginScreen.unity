@@ -2952,7 +2952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e72bfe7f6814a841967878fd2527661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 0
+  sceneName: 1
   playerPos: {x: 0, y: 0}
   playerStorage: {fileID: 11400000, guid: 4ef9d6e9f16e277449e42a6155d83420, type: 2}
   playerHpSO: {fileID: 11400000, guid: a4e18a171d79bc4478c152d439d66619, type: 2}

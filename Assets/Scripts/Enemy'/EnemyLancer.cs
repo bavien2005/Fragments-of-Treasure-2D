@@ -66,16 +66,22 @@ public class EnemyLancer : MonoBehaviour
         // hướng từ enemy → player
         Vector2 dir = (player.position - attackPoint.position).normalized;
 
-        RaycastHit2D hit = Physics2D.Raycast(
-            attackPoint.position,
-            dir,
-            attackDistance,
-            playerLayer
-        );
+        RaycastHit2D[] hits = Physics2D.RaycastAll(
+        attackPoint.position,
+        dir,
+        attackDistance,
+        playerLayer
+);
 
-        if (hit.collider != null)
+        foreach (var hit in hits)
         {
-            Debug.Log("Stab hit Player!");
+            PlayerDamReceive player = hit.collider.GetComponentInParent<PlayerDamReceive>();
+
+            if (player != null)
+            {
+                Debug.Log("Bố đâm chết cụ m h!");
+                player.Deduct(1);
+            }
         }
     }
     void OnDrawGizmos()

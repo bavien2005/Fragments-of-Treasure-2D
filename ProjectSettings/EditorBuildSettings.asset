@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/MainUI/Scenes/MainMenu.unity
     guid: 1dac552c329731a40b344ba18afa4878
   - enabled: 1
+    path: Assets/Scenes/BeginScreen.unity
+    guid: 727b8d6b08cf94d489e37a1d504bda4d
+  - enabled: 1
     path: Assets/MainUI/Scenes/ForestStartScene.unity
     guid: 5509a20da43d2614bb7def0066de71c9
   - enabled: 1
@@ -24,11 +27,8 @@ EditorBuildSettings:
     path: Assets/MainUI/Scenes/InsideCave.unity
     guid: 724253d14f0b5c6478fe323813aad157
   - enabled: 1
-    path: Assets/Scenes/BeginScreen.unity
-    guid: 727b8d6b08cf94d489e37a1d504bda4d
-  - enabled: 0
-    path: Assets/_Recovery/0 (2).unity
-    guid: 5a842831b6134c04290a18487810a2c3
+    path: Assets/Scenes/islandScene.unity
+    guid: 8092ac37771b41541b69a2e16a5b994d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
