@@ -2,8 +2,11 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Enemy
+  - AttackArea
+  - PlayerAttackArea
   layers:
   - Default
   - TransparentFX
@@ -11,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
@@ -41,3 +44,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 3577849035
+    locked: 0
+  - name: Arrow
+    uniqueID: 2776971285
+    locked: 0
+  - name: Player
+    uniqueID: 899582221
+    locked: 0
+  - name: Item
+    uniqueID: 2318444139
+    locked: 0
+  - name: NPC
+    uniqueID: 31743257
+    locked: 0
+  - name: Effects
+    uniqueID: 3492766743
+    locked: 0
+  m_RenderingLayers:
+  - Default
