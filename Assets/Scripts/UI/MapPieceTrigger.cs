@@ -10,7 +10,7 @@ public class MapPieceTrigger : MonoBehaviour
     [SerializeField] private GameObject obj;
 
     private bool collected = false;
-
+  
     private void OnTriggerEnter2D(Collider2D other)
     {
         

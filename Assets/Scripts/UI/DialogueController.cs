@@ -56,7 +56,5 @@ public class DialogueController : MonoBehaviour
     {
         dialoguePanel.SetActive(false);
         isTalking = false;
-
-        Debug.Log("❌ Tắt hội thoại do đi xa");
     }
 }

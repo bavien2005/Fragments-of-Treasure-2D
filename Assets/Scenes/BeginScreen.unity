@@ -4127,7 +4127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -30, y: -24}
+  m_AnchoredPosition: {x: -54, y: 21.4}
   m_SizeDelta: {x: 443.3609, y: 76.086}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &278589790
@@ -4177,15 +4177,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 27
+  m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -8036,7 +8036,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.61289316}
-  m_AnchoredPosition: {x: -172, y: 25}
+  m_AnchoredPosition: {x: -201.8, y: 54.3}
   m_SizeDelta: {x: 163.1, y: 37.825}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528573415
@@ -8086,8 +8086,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13581,7 +13581,7 @@ Transform:
   m_GameObject: {fileID: 869617662}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: -1.4, z: 0}
+  m_LocalPosition: {x: 1.2, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25305,18 +25305,16 @@ MonoBehaviour:
   nameText: {fileID: 528573415}
   lines:
   - speaker: Player
-    text: "Hello, T\xF4i \u0111ang c\xF3 1 m\u1EA3nh b\u1EA3n \u0111\u1ED3 kho b\xE1u
-      c\u1EE7a b\u1ED1 t\xF4i \u0111\u1EC3 l\u1EA1i"
-  - speaker: Player
-    text: "B\u1EA1n c\xF3 mu\u1ED1n \u0111i kh\xE1m ph\xE1 v\xE0 truy t\xECm n\xF3
-      c\xF9ng t\xF4i kh\xF4ng."
+    text: "Hello, Nghe b\u1EA3o b\u1EA1n c\xF3 chuy\u1EC7n t\xECm t\xF4i"
   - speaker: Monk
-    text: "Xin l\u1ED7i, t\xF4i kh\xF4ng th\u1EC3 \u0111i c\xF9ng b\u1EA1n."
+    text: "Khi chi\u1EBFc b\xF3ng th\u1EE9 ba ch\u1EA1m v\xE0o vi\xEAn \u0111\xE1
+      kh\xF4ng t\xEAn h\xE3y \u0111i theo ti\u1EBFng th\xEC th\u1EA7m c\u1EE7a m\u1EB7t
+      \u0111\u1EA5t."
   - speaker: Monk
-    text: "Nh\u01B0ng ch\xFAc b\u1EA1n may m\u1EAFn v\xE0 t\xECm \u0111\u01B0\u1EE3c
-      kho b\xE1u tr\u1EDF v\u1EC1 nh\xE9"
+    text: "N\u01A1i \xE1nh s\xE1ng bi ch\u1ED3n v\xF9i s\u1EBD ch\u1EC9 \u0111\u01B0\u1EDDng
+      \u0111\u1EBFn \u0111\xF3a hoa ch\u01B0a t\xE0n sau song s\u1EAFt m\xE2y tr\u1EDDi"
   - speaker: 'Player '
-    text: "Thankyou. V\u1EADy t\u1EA1m bi\u1EC7t nh\xE9."
+    text: ???
 --- !u!4 &1611358638
 Transform:
   m_ObjectHideFlags: 0
@@ -46509,7 +46507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1872245164
 RectTransform:
   m_ObjectHideFlags: 0
@@ -46900,8 +46898,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117ca93a506183e42a16c8399fd35692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
-  hpMax: 10
+  hp: 35
+  hpMax: 35
   isHurt: 0
   isDead: 0
   hurtTime: 0.5
