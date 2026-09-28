@@ -15,7 +15,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -58,6 +58,9 @@ TagManager:
     locked: 0
   - name: NPC
     uniqueID: 31743257
+    locked: 0
+  - name: Enemy
+    uniqueID: 436897759
     locked: 0
   - name: Effects
     uniqueID: 3492766743

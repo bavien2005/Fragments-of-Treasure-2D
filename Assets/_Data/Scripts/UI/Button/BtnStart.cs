@@ -37,7 +37,7 @@ public class BtnStart : BaseButton
         this.canvas.enabled = true;
         this.transAnim.SetTrigger("End");
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("BeginScreen");
+        SceneManager.LoadScene("ForestStartScene");
     }
     IEnumerator StartMenuGame()
     {

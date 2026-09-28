@@ -8,6 +8,7 @@ public class BossAttack2 : DinoBehaviourScript
     [SerializeField] protected Transform centerPoint;
     [SerializeField] protected PolygonCollider2D collide;
     [SerializeField] protected SpriteRenderer sprite;
+    [SerializeField] protected BossMeteorRain meteorRain;
     [SerializeField] protected float disToCenter;
     [SerializeField] protected bool attack2;
     public bool Attack2 => attack2;
@@ -19,6 +20,7 @@ public class BossAttack2 : DinoBehaviourScript
         this.LoadBossAttackCtrl();
         this.LoadCollider();
         this.LoadSpriteRenderer();
+        this.LoadMeteorRain();
     }
     protected void LoadCenterPoint()
     {
@@ -43,6 +45,12 @@ public class BossAttack2 : DinoBehaviourScript
         if (this.sprite != null) return;
         this.sprite = GetComponentInChildren<SpriteRenderer>();
         Debug.Log(transform.name + ": LoadSpriteRenderer", gameObject);
+    }
+    protected void LoadMeteorRain()
+    {
+        if (this.meteorRain != null) return;
+        this.meteorRain = GetComponentInChildren<BossMeteorRain>(true);
+        Debug.Log(transform.name + ": LoadMeteorRain", gameObject);
     }
     public void Attacking2()
     {
@@ -81,10 +89,18 @@ public class BossAttack2 : DinoBehaviourScript
         this.sprite.enabled = false;
         this.bossAttackCtrl.angry = false;
         this.attack2 = true;
-        this.collide.enabled = true;
+        this.sprite.enabled = true;
+        this.sprite.color = new Color(1f, 0.26f, 0.08f, 0.13f);
+        // The red area is visual warning only. Damage is now dealt by the
+        // individual falling meteors when they land on the player.
+        this.collide.enabled = false;
+        this.meteorRain?.StartRain();
         yield return StartCoroutine(PlayAttack2Sound());
 
+        this.meteorRain?.StopRain();
         this.attack2 = false;
+        this.sprite.enabled = false;
+        this.sprite.color = Color.white;
         this.collide.enabled = false;
         this.bossAttackCtrl.attackCount = 0;
         this.isWorking2 = true;

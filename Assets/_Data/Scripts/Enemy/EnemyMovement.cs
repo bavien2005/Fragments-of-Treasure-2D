@@ -12,10 +12,12 @@ public class EnemyMovement : EnemyAbstract
     [SerializeField] protected float moveTime = 2f;
     [SerializeField] protected float moveTimeCounter = 0f;
     [SerializeField] protected bool isMoving;
+    protected float treasureSlowMultiplier = 1f;
+    protected float treasureSlowEndTime;
     protected Vector2 wayPoint;
     public Vector2 WayPoint => wayPoint;
     public bool IsMoving => isMoving;
-    public float Speed => speed;
+    public float Speed => this.GetCurrentSpeed();
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -47,7 +49,7 @@ public class EnemyMovement : EnemyAbstract
     {
         this.isMoving = true;
         this.enemyCtrl.Rigid.MovePosition(Vector2.MoveTowards
-        (transform.parent.position, this.wayPoint, this.speed * Time.fixedDeltaTime));
+        (transform.parent.position, this.wayPoint, this.GetCurrentSpeed() * Time.fixedDeltaTime));
     }
     
     protected void StopMoving()
@@ -69,5 +71,19 @@ public class EnemyMovement : EnemyAbstract
             Random.Range(this.distanceMinX, this.distanceMaxX),
             Random.Range(this.distanceMinY, this.distanceMaxY)
         );
+    }
+    public void ApplyTreasureSlow(float multiplier, float duration)
+    {
+        this.treasureSlowMultiplier = Mathf.Min(this.treasureSlowMultiplier, Mathf.Clamp(multiplier, 0.1f, 1f));
+        this.treasureSlowEndTime = Mathf.Max(this.treasureSlowEndTime, Time.time + duration);
+    }
+    protected float GetCurrentSpeed()
+    {
+        if (Time.time >= this.treasureSlowEndTime)
+        {
+            this.treasureSlowMultiplier = 1f;
+            return this.speed;
+        }
+        return this.speed * this.treasureSlowMultiplier;
     }
 }

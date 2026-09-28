@@ -13,5 +13,6 @@ public enum SelectSound
     Attack2,
     MonsterBreath,
     Victory,
-    ClickBtn
+    ClickBtn,
+    ResonanceSkill,
 }

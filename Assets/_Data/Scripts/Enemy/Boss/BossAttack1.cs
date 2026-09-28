@@ -97,7 +97,7 @@ public class BossAttack1 : DinoBehaviourScript
         this.bossAttackCtrl.attackCount += 1;
 
         //Chuyển kĩ năng
-        if (this.bossAttackCtrl.attackCount == 3)
+        if (this.bossAttackCtrl.attackCount == 1)
         {
             this.isWorking1 = true;
             this.bossAttackCtrl.BossAttack2.isWorking2 = false;

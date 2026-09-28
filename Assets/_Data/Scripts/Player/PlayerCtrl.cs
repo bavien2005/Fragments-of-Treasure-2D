@@ -15,6 +15,7 @@ public class PlayerCtrl : DinoBehaviourScript
     [SerializeField] protected PlayerFlipDirect playerFlipDirect;
     [SerializeField] protected PlayerDash playerDash;
     [SerializeField] protected PlayerDamReceive playerDamReceive;
+    [SerializeField] protected PlayerTreasureResonance playerTreasureResonance;
     public Animator Anim => anim;
     public PlayerMovement PlayerMovement => playerMovement;
     public PlayerAttack PlayerAttack => playerAttack;
@@ -23,6 +24,7 @@ public class PlayerCtrl : DinoBehaviourScript
     public PlayerFlipDirect PlayerFlipDirect => playerFlipDirect;
     public PlayerDash PlayerDash => playerDash;
     public PlayerDamReceive PlayerDamReceive => playerDamReceive;
+    public PlayerTreasureResonance PlayerTreasureResonance => playerTreasureResonance;
     protected override void Awake()
     {
         base.Awake();
@@ -40,6 +42,7 @@ public class PlayerCtrl : DinoBehaviourScript
         this.LoadPlayerFlipDirect();
         this.LoadPlayerDash();
         this.LoadPlayerDamReceive();
+        this.LoadPlayerTreasureResonance();
     }
 
     protected void LoadAnimator()
@@ -90,5 +93,10 @@ public class PlayerCtrl : DinoBehaviourScript
         if (this.playerDamReceive != null) return;
         this.playerDamReceive = GetComponentInChildren<PlayerDamReceive>();
         Debug.Log(transform.name + ":LoadPlayerDamReceive", gameObject);
+    }
+    protected void LoadPlayerTreasureResonance()
+    {
+        if (this.playerTreasureResonance != null) return;
+        this.playerTreasureResonance = GetComponent<PlayerTreasureResonance>();
     }
 }

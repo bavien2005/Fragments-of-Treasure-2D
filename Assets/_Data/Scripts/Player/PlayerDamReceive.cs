@@ -7,6 +7,7 @@ public class PlayerDamReceive : DamageReceiver
     [Header("Player Dam Receive")]
     [SerializeField] protected int playerHpMax = 10;
     [SerializeField] protected float playerHurtTime = 0.5f;
+    [SerializeField] protected float meteorStunTime = 0.55f;
     [SerializeField] protected CapsuleCollider2D collide;
     [SerializeField] protected PlayerCtrl playerCtrl;
     [SerializeField] protected PlayerHpSO playerHpSO;
@@ -51,6 +52,25 @@ public class PlayerDamReceive : DamageReceiver
         this.StopMovement();
         AudioManagerr.Instance.ClockMusic();
         RestartToggle.Instance.RestartGameMenu();
+    }
+
+    /// <summary>
+    /// Reuses the player's existing Hurt animation/state when a falling rock
+    /// actually hits them. IsHurt blocks movement, attacks and shooting, so it
+    /// also provides a brief, readable stun and prevents meteor hit spam.
+    /// </summary>
+    public bool ReceiveMeteorHit(int damage)
+    {
+        if (this.isDead || this.isHurt) return false;
+
+        this.hurtTime = this.meteorStunTime;
+        this.hurtTimeCounter = 0f;
+        this.Deduct(damage);
+
+        if (AudioManagerr.Instance != null)
+            AudioManagerr.Instance.PlaySFX("SwordBlood", 1f);
+
+        return true;
     }
     protected void StopMovement()
     {

@@ -18,6 +18,7 @@ public class InputManager : DinoBehaviourScript
     public bool InputAttack => inputAttack;
     [SerializeField] protected bool inputDash = true;
     public bool InputDash => inputDash;
+    [SerializeField] protected bool inputTreasureResonance;
     protected override void Awake()
     {
         base.Awake();
@@ -31,6 +32,7 @@ public class InputManager : DinoBehaviourScript
         this.GetInputChangeWeapon();
         this.GetInputDash();
         this.GetInputHealing();
+        this.GetInputTreasureResonance();
     }
     public void SetAttack(bool _bool)
     {
@@ -39,6 +41,12 @@ public class InputManager : DinoBehaviourScript
     public void SetDash(bool _bool)
     {
         this.inputDash = _bool;
+    }
+    public bool ConsumeTreasureResonance()
+    {
+        if (!this.inputTreasureResonance) return false;
+        this.inputTreasureResonance = false;
+        return true;
     }
     protected void GetInputMovement()
     {
@@ -65,6 +73,10 @@ public class InputManager : DinoBehaviourScript
     protected void GetInputDash()
     {
         if (Input.GetKeyDown(KeyCode.Space)) this.inputDash = false;
+    }
+    protected void GetInputTreasureResonance()
+    {
+        this.inputTreasureResonance = Input.GetKeyDown(KeyCode.Q);
     }
     public bool GetInputHealing()
     {
