@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyDamReceive : DamageReceiver
 {
+    public event System.Action<EnemyDamReceive> Died;
     [Header("Enemy Dam Receive")]
     [SerializeField] protected EnemyCtrl enemyCtrl;
     [SerializeField] protected CapsuleCollider2D collide;
@@ -41,6 +42,7 @@ public class EnemyDamReceive : DamageReceiver
     }
     protected override void OnDead()
     {
+        this.Died?.Invoke(this);
         this.collide.enabled = false;
         this.enemyCtrl.Rigid.constraints = RigidbodyConstraints2D.FreezeAll;
         this.OnDeadDrop();

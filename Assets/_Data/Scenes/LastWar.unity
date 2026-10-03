@@ -1883,7 +1883,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: d97f82dc122123645ac74369551d481e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.517
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -25352,6 +25352,9 @@ MonoBehaviour:
   enemySpawnCtrl: {fileID: 705281773}
   delaySpawnTime: 1
   spawnTimer: 0
+  bossToUnlock: {fileID: 0}
+  bossRevealDelay: 1.5
+  bossReleased: 0
 --- !u!114 &705281773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27840,7 +27843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820c32391bd6a25468c763bb406c4bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  damage: 10
 --- !u!4 &1028171453
 Transform:
   m_ObjectHideFlags: 0
@@ -29036,7 +29039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820c32391bd6a25468c763bb406c4bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 8
+  damage: 15
 --- !u!1 &1164497732
 GameObject:
   m_ObjectHideFlags: 0
@@ -30357,6 +30360,8 @@ MonoBehaviour:
   hurtTimeCounter: 0
   playerHpMax: 35
   playerHurtTime: 0.5
+  hitSoundName: SwordBlood
+  hitSoundVolume: 0.8
   meteorStunTime: 0.55
   collide: {fileID: 1319020020}
   playerCtrl: {fileID: 1566413399}
@@ -31543,6 +31548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyCtrl: {fileID: 590733348}
   target: {fileID: 0}
+  alwaysFollowPlayer: 0
 --- !u!4 &1408138562
 Transform:
   m_ObjectHideFlags: 0
@@ -33427,8 +33433,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 38.440002, y: 2.0799713}
-  m_SizeDelta: {x: 51.12, y: 47.12}
+  m_AnchoredPosition: {x: 39.229996, y: 1.4199982}
+  m_SizeDelta: {x: 43.76, y: 44.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1550955612
 MonoBehaviour:
@@ -33589,7 +33595,7 @@ Transform:
   m_GameObject: {fileID: 1566413398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.2, y: -1.8, z: 0}
+  m_LocalPosition: {x: -27.76, y: -1.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -38979,8 +38985,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6411e463727931348a9e949d0147b1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  damageTimer: 1
+  damage: 8
+  damageTimer: 0.5
   damageTimerCounter: 0
 --- !u!60 &2047536284
 PolygonCollider2D:
@@ -40141,7 +40147,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &2184239951091997781
 GameObject:
   m_ObjectHideFlags: 0
@@ -40159,7 +40165,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!223 &2203319912267623850
 Canvas:
   m_ObjectHideFlags: 0

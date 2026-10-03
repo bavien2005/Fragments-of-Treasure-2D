@@ -20,7 +20,6 @@ public class EnemySpawnPoint : DinoBehaviourScript
         {
             points.Add(point);
         }
-        Debug.Log(transform.name + ": LoadSpawnPoints", gameObject);
     }
     public Transform GetRandomPoint()
     {

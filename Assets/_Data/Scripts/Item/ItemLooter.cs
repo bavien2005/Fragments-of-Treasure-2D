@@ -17,7 +17,6 @@ public class ItemLooter : DinoBehaviourScript
     {
         if (this.inventory != null) return;
         this.inventory = GetComponentInParent<Inventory>();
-        Debug.Log(transform.name + ": LoadInventory", gameObject);
     }
     protected void LoadCollider()
     {
@@ -25,7 +24,6 @@ public class ItemLooter : DinoBehaviourScript
         this.collide = GetComponent<CircleCollider2D>();
         this.collide.isTrigger = true;
         this.collide.radius = 0.5f;
-        Debug.Log(transform.name + ": LoadCollider", gameObject);
     }
     protected void OnTriggerEnter2D(Collider2D other)
     {

@@ -16,7 +16,6 @@ public class BossAnimation : AnimationAbtract
     {
         if (this.bossCtrl != null) return;
         this.bossCtrl = GetComponentInParent<BossCtrl>();
-        Debug.Log(transform.name + ": LoadBossCtrl", gameObject);
     }
     protected override void SetAnimation()
     {

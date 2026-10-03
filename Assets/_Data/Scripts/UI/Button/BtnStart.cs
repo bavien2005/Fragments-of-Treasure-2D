@@ -22,7 +22,6 @@ public class BtnStart : BaseButton
     {
         if (this.transAnim != null) return;
         this.transAnim = transform.parent.GetComponentInChildren<Animator>();
-        Debug.Log(transform.name + ": LoadTransAnim", gameObject);
     }
     protected override void OnClick()
     {

@@ -32,14 +32,12 @@ public class WinToggle : BaseToggle
     {
         if (this.winMenu != null) return;
         this.winMenu = GameObject.Find("WinMenu").transform;
-        Debug.Log(transform.name + ": LoadWinMenu", gameObject);
     }
 
     protected void LoadPlayerMenu()
     {
         if (this.playerMenu != null) return;
         this.playerMenu = GameObject.Find("UITopLeft/PlayerMenu").transform;
-        Debug.Log(transform.name + ": LoadPlayerMenu", gameObject);
     }
     public void WinGameMenu()
     {

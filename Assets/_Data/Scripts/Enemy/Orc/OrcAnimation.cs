@@ -15,7 +15,6 @@ public class OrcAnimation : AnimationAbtract
     {
         if (this.orcCtrl != null) return;
         this.orcCtrl = GetComponentInParent<OrcCtrl>();
-        Debug.Log(transform.name + ": LoadOrcCtrl", gameObject);
     }
     protected override void SetAnimWalk()
     {

@@ -27,7 +27,6 @@ public class PlayerDash : PlayerAbstract
     {
         if (this.trailRenderer != null) return;
         this.trailRenderer = GetComponent<TrailRenderer>();
-        Debug.Log(transform.name + ": LoadTrailRenderer", gameObject);
     }
     protected void GetInput()
     {

@@ -16,7 +16,6 @@ public abstract class GetItemFromInvent : DinoBehaviourScript
     {
         if (this.inventory != null) return;
         this.inventory = GetComponent<Inventory>();
-        Debug.Log(transform.name + ": LoadInventory");
     }
 
     protected void Update()

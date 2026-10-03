@@ -37,30 +37,25 @@ public class BossCtrl : EnemyCtrl
     {
         if (this.anim != null) return;
         this.anim = GetComponentInChildren<Animator>();
-        Debug.Log(transform.name + ": LoadAnimation", gameObject);
     }
     protected void LoadBossMovement()
     {
         if (this.bossMovement != null) return;
         this.bossMovement = GetComponentInChildren<BossMovement>();
-        Debug.Log(transform.name + ": LoadBossMovement", gameObject);
     }
     protected void LoadBossFlipDirect()
     {
         if (this.bossFlipDirect != null) return;
         this.bossFlipDirect = GetComponentInChildren<BossFlipDirect>();
-        Debug.Log(transform.name + ": LoadBossFlipDirect", gameObject);
     }
     protected void LoadBossAttackCtrl()
     {
         if (this.bossAttackCtrl != null) return;
         this.bossAttackCtrl = GetComponentInChildren<BossAttackCtrl>();
-        Debug.Log(transform.name + ": LoadBossAttackCtrl", gameObject);
     }
     protected void LoadBossDamReceive()
     {
         if (this.bossDamReceive != null) return;
         this.bossDamReceive = GetComponentInChildren<BossDamReceive>();
-        Debug.Log(transform.name + ": LoadBossDamReceive", gameObject);
     }
 }

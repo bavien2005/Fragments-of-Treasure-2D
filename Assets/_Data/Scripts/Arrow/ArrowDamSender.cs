@@ -16,18 +16,32 @@ public class ArrowDamSender : DamageSender
     {
         if (this.arrowCtrl != null) return;
         this.arrowCtrl = GetComponentInParent<ArrowCtrl>();
-        Debug.Log(transform.name + ": LoadArrowCtrl", gameObject);
     }
     protected override void SendToTransform(Transform collider)
     {
-        base.SendToTransform(collider);
+        BossLevel1 darkForestBoss = collider.GetComponent<BossLevel1>();
+
+        if (darkForestBoss != null)
+        {
+            darkForestBoss.ReceiveArrowHit();
+            this.canSendDamage = true;
+        }
+        else
+        {
+            base.SendToTransform(collider);
+        }
+
         if (!this.canSendDamage) return;
+
         this.arrowCtrl.ArrowDespawn.DespawnObj();
         this.canSendDamage = false;
     }
     protected override void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.transform.parent == this.arrowCtrl.Shooter) return;
+        if (this.arrowCtrl.Shooter != null && collider.transform.root == this.arrowCtrl.Shooter.root)
+            return;
         SendToTransform(collider.transform);
     }
+
+
 }

@@ -16,7 +16,6 @@ public class HpBar : DinoBehaviourScript
     {
         if (this.sliderHp != null) return;
         this.sliderHp = GetComponentInChildren<SliderHp>();
-        Debug.Log(transform.name + ": LoadSliderHp", gameObject);
     }
     protected void FixedUpdate()
     {

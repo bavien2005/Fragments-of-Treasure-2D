@@ -23,13 +23,11 @@ public class FollowPlayer : DinoBehaviourScript
     {
         if (this.mainCam != null) return;
         this.mainCam = FindAnyObjectByType<Camera>();
-        Debug.Log(transform.name + ": LoadCamera", gameObject);
     }
     protected void LoadPlayer()
     {
         if (this.player != null) return;
         this.player = GameObject.Find("Player").transform;
-        Debug.Log(transform.name + ": LoadPlayer", gameObject);
     }
     protected void Following()
     {

@@ -32,7 +32,6 @@ public class PlayerMovement : PlayerAbstract
     {
         if (this._rb != null) return;
         this._rb = GetComponentInParent<Rigidbody2D>();
-        Debug.Log(transform.name + ": LoadRigidbody", gameObject);
     }
     public void SetHorizontal(float horizontal)
     {

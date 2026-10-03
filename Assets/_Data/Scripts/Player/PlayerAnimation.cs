@@ -16,7 +16,6 @@ public class PlayerAnimation : AnimationAbtract
     {
         if (this.playerCtrl != null) return;
         this.playerCtrl = GetComponentInParent<PlayerCtrl>();
-        Debug.Log(transform.name + ": LoadPlayerCtrl", gameObject);
     }
     protected override void SetAnimation()
     {

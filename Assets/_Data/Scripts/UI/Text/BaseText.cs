@@ -15,6 +15,5 @@ public abstract class BaseText : DinoBehaviourScript
     {
         if (this.text != null) return;
         this.text = GetComponent<TextMeshProUGUI>();
-        Debug.Log(transform.name + ": LoadText", gameObject);
     }
 }

@@ -21,7 +21,6 @@ public abstract class BaseSlider : DinoBehaviourScript
     {
         if (this.slider != null) return;
         this.slider = GetComponent<Slider>();
-        Debug.Log(transform.name + ": LoadSlider", gameObject);
     }
     protected void AddOnClickEvent()
     {

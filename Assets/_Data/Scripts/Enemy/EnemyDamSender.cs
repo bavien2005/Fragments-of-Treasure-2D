@@ -19,14 +19,12 @@ public class EnemyDamSender : DamageSender
     {
         if (this.enemyCtrl != null) return;
         this.enemyCtrl = GetComponentInParent<EnemyCtrl>();
-        Debug.Log(transform.name + ": LoadEnemyCtrl", gameObject);
     }
     protected void LoadCollider()
     {
         if (this.collide != null) return;
         this.collide = GetComponent<PolygonCollider2D>();
         this.collide.isTrigger = true;
-        Debug.Log(transform.name + ": LoadCollider", gameObject);
     }
     protected override void OnTriggerEnter2D(Collider2D other)
     {

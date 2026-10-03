@@ -17,7 +17,6 @@ public class ItemPickupable : DinoBehaviourScript
     {
         if (this.itemCtrl != null) return;
         this.itemCtrl = GetComponentInParent<ItemCtrl>();
-        Debug.Log(transform.name + ": LoadItemCtrl", gameObject);
     }
     protected void LoadCollider()
     {
@@ -25,7 +24,6 @@ public class ItemPickupable : DinoBehaviourScript
         this.collide = GetComponent<CircleCollider2D>();
         this.collide.isTrigger = true;
         this.collide.radius = 0.3f;
-        Debug.Log(transform.name + ": LoadCollider", gameObject);
     }
     protected static ItemCode String2ItemCode(string itemName)
     {

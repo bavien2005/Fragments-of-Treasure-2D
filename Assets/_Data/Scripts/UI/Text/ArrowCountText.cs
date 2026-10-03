@@ -19,7 +19,6 @@ public class ArrowCountText : BaseText
     {
         if (this.arrowSO != null) return;
         this.arrowSO = Resources.Load<ArrowSO>("GameData/ArrowSO");
-        Debug.Log(transform.name + ": LoadArrowSO", gameObject);
     }
     protected void ShowingArrowCount()
     {

@@ -4,9 +4,9 @@ public class EnemyBullet : MonoBehaviour
 {
     private Vector3 movementDirection;
 
-    [SerializeField] private float timeLife = 5f;
+    [SerializeField, Min(0f)] private float timeLife = 5f;
 
-    [SerializeField] private int dmg = 2;
+    [SerializeField, Min(0)] private int dmg = 2;
     void Start()
     {
         Destroy(gameObject, timeLife);
@@ -20,7 +20,7 @@ public class EnemyBullet : MonoBehaviour
         transform.position += movementDirection * Time.deltaTime;
     }
 
-    public void setMovementDirection(Vector3 direction)
+    public void SetMovementDirection(Vector3 direction)
     {
         movementDirection = direction;
     }

@@ -19,12 +19,10 @@ public class EnemySpawnCtrl : DinoBehaviourScript
     {
         if (this.enemySpawn != null) return;
         this.enemySpawn = GetComponent<EnemySpawn>();
-        Debug.Log(transform.name + ": LoadEnemySpawn", gameObject);
     }
     protected void LoadEnemySpawnPoint()
     {
         if (this.enemySpawnPoint != null) return;
         this.enemySpawnPoint = Transform.FindAnyObjectByType<EnemySpawnPoint>();
-        Debug.Log(transform.name + ": LoadEnemySpawnPoint", gameObject);
     }
 }

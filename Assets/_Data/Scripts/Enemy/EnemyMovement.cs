@@ -27,7 +27,6 @@ public class EnemyMovement : EnemyAbstract
     {
         if (this.homePoint != null) return;
         this.homePoint = GameObject.Find("HomePoint").transform;
-        Debug.Log(transform.name + ": LoadHomePoint", gameObject);
     }
     protected void FixedUpdate()
     {
@@ -37,6 +36,7 @@ public class EnemyMovement : EnemyAbstract
     {
         if (this.enemyCtrl.EnemyDamReceive.IsDead) return;
         if (this.enemyCtrl.EnemyDamReceive.IsHurt) return;
+        if (this.enemyCtrl.EnemyFollow.AlwaysFollowPlayer) return;
         if (this.enemyCtrl.EnemyDetect.Detect)
         {
             this.isMoving = true;
@@ -85,5 +85,10 @@ public class EnemyMovement : EnemyAbstract
             return this.speed;
         }
         return this.speed * this.treasureSlowMultiplier;
+    }
+
+    public void SetSpeed(float value)
+    {
+        this.speed = value;
     }
 }

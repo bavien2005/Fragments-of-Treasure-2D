@@ -35,43 +35,36 @@ public class EnemyCtrl : DinoBehaviourScript
     {
         if (this.rigid != null) return;
         this.rigid = GetComponentInChildren<Rigidbody2D>();
-        Debug.Log(transform.name + ":LoadRigidbody", gameObject);
     }
     protected void LoadEnemyMovement()
     {
         if (this.enemyMovement != null) return;
         this.enemyMovement = GetComponentInChildren<EnemyMovement>();
-        Debug.Log(transform?.name + ": LoadEnemyMovement", gameObject);
     }
     protected void LoadEnemyFlipDirect()
     {
         if (this.enemyFlipDirect != null) return;
         this.enemyFlipDirect = GetComponentInChildren<EnemyFlipDirect>();
-        Debug.Log(transform.name + ": LoadEnemyFlipDirect", gameObject);
     }
     protected void LoadEnemyFollow()
     {
         if (this.enemyFollow != null) return;
         this.enemyFollow = GetComponentInChildren<EnemyFollow>();
-        Debug.Log(transform?.name + ":LoadEnemyFollow", gameObject);
     }
     protected void LoadEnemyDetect()
     {
         if (this.enemyDetect != null) return;
         this.enemyDetect = GetComponentInChildren<EnemyDetectPlayer>();
-        Debug.Log(transform?.name + ":LoadEnemyDetect", gameObject);
     }
     protected void LoadEnemyDamReceive()
     {
         if (this.enemyDamReceive != null) return;
         this.enemyDamReceive = GetComponentInChildren<EnemyDamReceive>();
-        Debug.Log(transform?.name + ":LoadEnemyDamReceive", gameObject);
     }
     protected void LoadEnemySO()
     {
         if (this.enemySO != null) return;
         string resPath = "Enemy/" + transform.name;
         this.enemySO = Resources.Load<EnemySO>(resPath);
-        Debug.Log(transform.name + ": LoadEnemySO", gameObject);
     }
 }

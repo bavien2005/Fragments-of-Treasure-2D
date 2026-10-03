@@ -19,12 +19,10 @@ public class SkeletonCtrl : EnemyCtrl
     {
         if (this.anim != null) return;
         this.anim = GetComponentInChildren<Animator>();
-        Debug.Log(transform.name + ":LoadAnimator", gameObject);
     }
     protected void LoadSkeletonAttack()
     {
         if (this.skeletonAttack != null) return;
         this.skeletonAttack = GetComponentInChildren<SkeletonAttack>();
-        Debug.Log(transform.name + ":LoadSkeletonAttack", gameObject);
     }
 }

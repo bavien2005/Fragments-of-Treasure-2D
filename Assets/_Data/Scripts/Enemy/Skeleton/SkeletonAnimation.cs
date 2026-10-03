@@ -15,7 +15,6 @@ public class SkeletonAnimation : AnimationAbtract
     {
         if (this.skeletonCtrl != null) return;
         this.skeletonCtrl = GetComponentInParent<SkeletonCtrl>();
-        Debug.Log(transform.name + ": LoadSkeletonCtrl", gameObject);
     }
     protected override void SetAnimWalk()
     {

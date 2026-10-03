@@ -7,6 +7,8 @@ public class PlayerDamReceive : DamageReceiver
     [Header("Player Dam Receive")]
     [SerializeField] protected int playerHpMax = 10;
     [SerializeField] protected float playerHurtTime = 0.5f;
+    [SerializeField] protected string hitSoundName = "SwordBlood";
+    [SerializeField, Range(0f, 1f)] protected float hitSoundVolume = 0.8f;
     [SerializeField] protected float meteorStunTime = 0.55f;
     [SerializeField] protected CapsuleCollider2D collide;
     [SerializeField] protected PlayerCtrl playerCtrl;
@@ -32,13 +34,11 @@ public class PlayerDamReceive : DamageReceiver
     {
         if (this.collide != null) return;
         this.collide = GetComponent<CapsuleCollider2D>();
-        Debug.Log(transform.name + ": LoadCollider", gameObject);
     }
     protected void LoadPlayerCtrl()
     {
         if (this.playerCtrl != null) return;
         this.playerCtrl = GetComponentInParent<PlayerCtrl>();
-        Debug.Log(transform.name + ": LoadPlayerCtrl", gameObject);
     }
     protected override void Reborn()
     {
@@ -54,6 +54,16 @@ public class PlayerDamReceive : DamageReceiver
         RestartToggle.Instance.RestartGameMenu();
     }
 
+    public override void Deduct(int damage)
+    {
+        int previousHp = this.hp;
+        base.Deduct(damage);
+        if (this.hp >= previousHp) return;
+
+        if (AudioManagerr.Instance != null)
+            AudioManagerr.Instance.PlaySFX(this.hitSoundName, this.hitSoundVolume);
+    }
+
     /// <summary>
     /// Reuses the player's existing Hurt animation/state when a falling rock
     /// actually hits them. IsHurt blocks movement, attacks and shooting, so it
@@ -66,9 +76,6 @@ public class PlayerDamReceive : DamageReceiver
         this.hurtTime = this.meteorStunTime;
         this.hurtTimeCounter = 0f;
         this.Deduct(damage);
-
-        if (AudioManagerr.Instance != null)
-            AudioManagerr.Instance.PlaySFX("SwordBlood", 1f);
 
         return true;
     }

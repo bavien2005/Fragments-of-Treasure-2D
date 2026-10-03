@@ -17,13 +17,11 @@ public class HpBarEnemy : HpBar
     {
         if (this.followTarget != null) return;
         this.followTarget = GetComponent<FollowTarget>();
-        Debug.Log(transform.name + ": LoadFollowTarget", gameObject);
     }
     protected void LoadSpawner()
     {
         if (this.spawner != null) return;
         this.spawner = GameObject.Find("HpBarEnemySpawn").GetComponent<Spawner>();
-        Debug.Log(transform.name + ": LoadSpawner", gameObject);
     }
     protected override void HpShowing()
     {

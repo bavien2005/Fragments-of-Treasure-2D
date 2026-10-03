@@ -40,12 +40,15 @@ public class EnemyDetectPlayer : EnemyAbstract
     }
     protected bool CheckDetect(Vector3 playerPos)
     {
+      
         float distanceToPlayer = Vector2.Distance(transform.position, playerPos);
         if (distanceToPlayer > this.directionRange)
         {
             this.detect = false;
             return false;
         }
+       
         return true;
     }
+
 }

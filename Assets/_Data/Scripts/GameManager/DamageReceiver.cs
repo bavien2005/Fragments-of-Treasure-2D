@@ -39,6 +39,7 @@ public class DamageReceiver : DinoBehaviourScript
         if (this.isDead) return;
         this.hp += hp;
         if (this.hp >= this.hpMax) this.hp = this.hpMax;
+       
     }
 
     public virtual void Deduct(int damage)

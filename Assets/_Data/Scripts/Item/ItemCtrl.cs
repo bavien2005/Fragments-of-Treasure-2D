@@ -15,6 +15,5 @@ public class ItemCtrl : DinoBehaviourScript
     {
         if (this.itemDespawn != null) return;
         this.itemDespawn = GetComponentInChildren<ItemDespawn>();
-        Debug.Log(transform.name + ": LoadItemDespawn", gameObject);
     }
 }

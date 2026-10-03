@@ -25,31 +25,26 @@ public class BtnRestart : BaseButton
     {
         if (this.arrowSO != null) return;
         this.arrowSO = Resources.Load<ArrowSO>("GameData/ArrowSO");
-        Debug.Log(transform.name + ": LOadArrowSO", gameObject);
     }
     protected void LoadHpPotionSO()
     {
         if (this.hpPotionSO != null) return;
         this.hpPotionSO = Resources.Load<HpPotionSO>("GameData/HpPotionSO");
-        Debug.Log(transform.name + ": LoadHpPotionSO", gameObject);
     }
     protected void LoadInventorySO()
     {
         if (this.inventorySO != null) return;
         this.inventorySO = Resources.Load<InventorySO>("GameData/InventorySO");
-        Debug.Log(transform.name + ": LoadInventorySO", gameObject);
     }
     protected void LoadPlayerHpSO()
     {
         if (this.playerHpSO != null) return;
         this.playerHpSO = Resources.Load<PlayerHpSO>("GameData/PlayerHpSO");
-        Debug.Log(transform.name + ": LoadPlayerHpSO", gameObject);
     }
     protected void LoadPlayerPos()
     {
         if (this.playerPos != null) return;
         this.playerPos = Resources.Load<PlayerPos>("GameData/PlayerPos");
-        Debug.Log(transform.name + ": LoadPlayerPos", gameObject);
     }
     protected override void OnClick()
     {

@@ -20,7 +20,11 @@ public class DamageSender : DinoBehaviourScript
     protected void SendToDamReceive(DamageReceiver damageReceiver)
     {
         damageReceiver.Deduct(this.damage);
-        AudioManagerr.Instance.PlaySFX("SwordBlood", 0.5f);
+        // Player and the Dark Forest boss play their own configurable hit SFX
+        // from their damage receiver. Keep the shared sound for other targets.
+        if (damageReceiver is PlayerDamReceive || damageReceiver is BossLevel1) return;
+        if (AudioManagerr.Instance != null)
+            AudioManagerr.Instance.PlaySFX("SwordBlood", 0.5f);
     }
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {

@@ -19,7 +19,6 @@ public class BossHpBarCtrl : DinoBehaviourScript
     {
         if (this.canvasBoss != null) return;
         this.canvasBoss = GameObject.Find("HpBarBoss").GetComponent<Canvas>();
-        Debug.Log(transform.name + ": LoadCanvasBoss", gameObject);
     }
     protected void Update()
     {

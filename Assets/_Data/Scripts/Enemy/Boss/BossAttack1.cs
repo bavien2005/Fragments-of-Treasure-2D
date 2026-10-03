@@ -28,31 +28,26 @@ public class BossAttack1 : DinoBehaviourScript
     {
         if (this.player != null) return;
         this.player = GameObject.Find("Player").transform;
-        Debug.Log(transform.name + ": LoadPlayer", gameObject);
     }
     protected void LoadBossAttackCtrl()
     {
         if (this.bossAttackCtrl != null) return;
         this.bossAttackCtrl = GetComponentInParent<BossAttackCtrl>();
-        Debug.Log(transform.name + ": LoadBossAttackCtrl", gameObject);
     }
     protected void LoadPolygonCollider()
     {
         if (this.collide1 != null) return;
         this.collide1 = GetComponent<PolygonCollider2D>();
-        Debug.Log(transform.name + ": LoadPolygonCollider", gameObject);
     }
     protected void LoadBoxCollider()
     {
         if (this.collide2 != null) return;
         this.collide2 = GameObject.Find("Blockplayer").transform.GetComponent<BoxCollider2D>();
-        Debug.Log(transform.name + ": LoadBoxCollider", gameObject);
     }
     protected void LoadSpriteRenderer()
     {
         if (this.spriteRenderer != null) return;
         this.spriteRenderer = GameObject.Find("Blockplayer").transform.GetComponent<SpriteRenderer>();
-        Debug.Log(transform.name + ": LoadSpriteRenderer", gameObject);
     }
     public void Attacking1()
     {

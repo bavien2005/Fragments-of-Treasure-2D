@@ -19,12 +19,10 @@ public class OrcCtrl : EnemyCtrl
     {
         if (this.anim != null) return;
         this.anim = GetComponentInChildren<Animator>();
-        Debug.Log(transform.name + ":LoadAnimator", gameObject);
     }
     protected void LoadOrcAttack()
     {
         if (this.orcAttack != null) return;
         this.orcAttack = GetComponentInChildren<OrcAttack>();
-        Debug.Log(transform.name + ":LoadOrcAttack", gameObject);
     }
 }

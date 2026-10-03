@@ -28,25 +28,21 @@ public class BossAttackCtrl : DinoBehaviourScript
     {
         if (this.bossCtrl != null) return;
         this.bossCtrl = GetComponentInParent<BossCtrl>();
-        Debug.Log(transform.name + ": LoadBossCtrl", gameObject); ;
     }
     protected void LoadBossAttack1()
     {
         if (this.bossAttack1 != null) return;
         this.bossAttack1 = GetComponentInChildren<BossAttack1>();
-        Debug.Log(transform.name + ": LoadBossAttack1", gameObject);
     }
     protected void LoadBossAttack2()
     {
         if (this.bossAttack2 != null) return;
         this.bossAttack2 = GetComponentInChildren<BossAttack2>();
-        Debug.Log(transform.name + ": LoadBossAttack2", gameObject);
     }
     protected void LoadBossAttack3()
     {
         if (this.bossAttack3 != null) return;
         this.bossAttack3 = GetComponentInChildren<BossAttack3>();
-        Debug.Log(transform.name + ": LoadBossAttack3", gameObject);
     }
     public float DistanceToTarget(Vector2 target)
     {

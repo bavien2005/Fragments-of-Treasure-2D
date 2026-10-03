@@ -18,7 +18,6 @@ public class ArrowCtrl : DinoBehaviourScript
     {
         if (this.arrowDespawn != null) return;
         this.arrowDespawn = GetComponentInChildren<ArrowDespawn>();
-        Debug.Log(transform.name + ": LoadArrowDespawn", gameObject);
     }
     public void SetShooter(Transform shooter)
     {

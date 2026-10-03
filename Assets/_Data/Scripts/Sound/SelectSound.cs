@@ -15,4 +15,10 @@ public enum SelectSound
     Victory,
     ClickBtn,
     ResonanceSkill,
+    HealBossLevel1,
+    CreateMini,
+    BossShoot,
+    BossBringerShoot,
+    SpellBossBringer,
+    MusicInsideCave
 }

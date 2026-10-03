@@ -18,13 +18,11 @@ public class BossMovement : DinoBehaviourScript
     {
         if (this.target != null) return;
         this.target = GameObject.Find("Player").transform;
-        Debug.Log(transform.name + ": LoadTarget", gameObject);
     }
     protected void LoadBossAttack()
     {
         if (this.bossAttack != null) return;
         this.bossAttack = transform.parent.GetComponentInChildren<BossAttack>();
-        Debug.Log(transform.name + ": LoadBossAttack", gameObject);
     }
     protected void Update()
     {

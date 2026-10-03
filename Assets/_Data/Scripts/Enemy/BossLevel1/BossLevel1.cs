@@ -1,175 +1,266 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-
+/// <summary>
+/// Dark Forest boss. Inherits DamageReceiver so player arrows can use the
+/// regular DamageSender path, while sword hits use their own damage setting.
+/// </summary>
 public class BossLevel1 : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float damageInterval = 0.5f;
-
+    [Header("Movement and attacks")]
+    [SerializeField, Min(0f)] private float speed = 3f;
+    [SerializeField, Min(0.01f)] private float damageInterval = 0.5f;
     [SerializeField] private GameObject bulletEnemy;
-
     [SerializeField] private Transform firePos;
-
-    [SerializeField] private float timeRandomSkill = 2f;
-
-    [SerializeField] private float bulletSpeedNormal = 20f;
-
-    [SerializeField] private float bulletSpeedAround = 10f;
-
+    [SerializeField] private Transform enemySpanwPos;
+    [SerializeField, Min(0.1f)] private float timeRandomSkill = 2f;
+    [SerializeField, Min(0f)] private float bulletSpeedNormal = 20f;
+    [SerializeField, Min(0f)] private float bulletSpeedAround = 10f;
+    [SerializeField, Min(1)] private int bulletsAroundCount = 12;
     [SerializeField] private GameObject miniEmeny;
+    [SerializeField] private PlayerDamReceive player;
+    [FormerlySerializedAs("dmgSender"), SerializeField, Min(0)] private int contactDamage = 3;
+    [SerializeField, Min(0)] private int healAmount = 5;
 
-    //[SerializeField] private GameObject usbPrefabs;
-
-    private float damageTimer = 0f;
-
-    [SerializeField] PlayerDamReceive player;
-
+    [Header("Health and player damage")]
+    [SerializeField] private int currentHealth;
+    [FormerlySerializedAs("hPBoss"), SerializeField, Min(1)] private int maxHealth = 50;
+    [SerializeField, Min(0)] private int slashDamage = 2;
+    [SerializeField, Min(0)] private int arrowDamage = 1;
+    [SerializeField, Min(0f)] private float hurtDuration = 0.5f;
     [SerializeField] private Slider hPSlider;
 
-    // private AudioEffect audioEffect;
+    [Header("Hit feedback")]
+    [SerializeField] private SpriteRenderer hitRenderer;
+    [SerializeField] private Color hitFlashColor = new Color(1f, 0.35f, 0.35f, 1f);
+    [SerializeField, Min(0f)] private float hitFlashDuration = 0.14f;
+    [SerializeField] private Animator bossAnimator;
+    [SerializeField] private string hurtTriggerName = "Hurt";
+    [SerializeField] private string deadBoolName = "Dead";
+    [SerializeField] private string hitSoundName = "SwordBlood";
+    [SerializeField, Range(0f, 1f)] private float hitSoundVolume = 0.8f;
 
-    [SerializeField] private int maxHP;
 
-    [SerializeField] private int dmgSender; 
+    [SerializeField] private GameObject healEffect;
 
+    private float damageTimer;
+    private bool isDead;
+    private Color originalHitColor = Color.white;
+    private Coroutine hitFlashRoutine;
+
+    private void Awake()
+    {
+        if (this.hitRenderer == null) this.hitRenderer = GetComponent<SpriteRenderer>();
+        if (this.bossAnimator == null) this.bossAnimator = GetComponent<Animator>();
+        healEffect.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        this.currentHealth = Mathf.Max(1, this.maxHealth);
+        this.isDead = false;
+        this.damageTimer = 0f;
+    }
 
     private void Start()
     {
-        StartCoroutine(randomSkill());
-     //   audioEffect = FindAnyObjectByType<AudioEffect>();
-        hPSlider.maxValue = maxHP;
-        hPSlider.value = maxHP;
+        if (this.hPSlider != null)
+        {
+            this.hPSlider.maxValue = this.maxHealth;
+            this.hPSlider.value = this.currentHealth;
+        }
+        if (this.hitRenderer != null) this.originalHitColor = this.hitRenderer.color;
+        StartCoroutine(this.RandomSkill());
     }
 
     private void Update()
     {
-        MoveToWardsPlayer();
+        if (this.isDead) return;
+        this.MoveTowardsPlayer();
+        if (this.damageTimer > 0f) this.damageTimer -= Time.deltaTime;
     }
+
+    private void MoveTowardsPlayer()
+    {
+        if (this.player == null) return;
+        transform.position = Vector2.MoveTowards(transform.position, this.player.transform.position, this.speed * Time.deltaTime);
+        if (transform.position.x < this.player.transform.position.x)
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        else if (transform.position.x > this.player.transform.position.x)
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+    }
+
+    private void TakeDamage(int damage)
+    {
+        Debug.Log(
+    "TakeDamage: damage = " + damage +
+    ", currentHealth = " + this.currentHealth +
+    ", isDead = " + this.isDead
+);
+
+        if (damage <= 0 || this.isDead) return;
+
+        this.currentHealth = Mathf.Max(0, this.currentHealth - damage);
+
+        Debug.Log("NEW HP = " + this.currentHealth);
+          if (this.hPSlider != null) this.hPSlider.value = this.currentHealth;
+        if (this.bossAnimator != null && this.HasAnimatorParameter(this.hurtTriggerName, 
+            AnimatorControllerParameterType.Trigger))
+            this.bossAnimator.SetTrigger(this.hurtTriggerName);
+        if (this.hitRenderer != null && this.hitFlashDuration > 0f)
+        {
+            if (this.hitFlashRoutine != null) StopCoroutine(this.hitFlashRoutine);
+            this.hitFlashRoutine = StartCoroutine(this.FlashOnHit());
+        }
+        if (AudioManagerr.Instance != null)
+            AudioManagerr.Instance.PlaySFX(this.hitSoundName, this.hitSoundVolume);
+
+        if (this.currentHealth == 0) this.Die();
+    }
+
+    public void ReceiveArrowHit()
+    {
+        Debug.Log("ReceiveArrowHit - arrowDamage = " + this.arrowDamage);
+        this.TakeDamage(this.arrowDamage);
+    }
+
+    private IEnumerator FlashOnHit()
+    {
+        this.hitRenderer.color = this.hitFlashColor;
+        yield return new WaitForSeconds(this.hitFlashDuration);
+        if (this.hitRenderer != null) this.hitRenderer.color = this.originalHitColor;
+        this.hitFlashRoutine = null;
+    }
+
+    private void Die()
+    {
+        this.isDead = true;
+        if (this.hPSlider != null) this.hPSlider.value = 0f;
+        if (this.bossAnimator != null && this.HasAnimatorParameter(this.deadBoolName, AnimatorControllerParameterType.Bool))
+            this.bossAnimator.SetBool(this.deadBoolName, true);
+        if (this.hitFlashRoutine != null)
+        {
+            StopCoroutine(this.hitFlashRoutine);
+            this.hitFlashRoutine = null;
+        }
+        if (this.hitRenderer != null) this.hitRenderer.color = this.originalHitColor;
+        AudioManagerr.Instance?.StopMusic();
+        Destroy(gameObject, 1f);
+    }
+
+
+    private bool HasAnimatorParameter(string parameterName, AnimatorControllerParameterType type)
+    {
+        if (string.IsNullOrEmpty(parameterName) || this.bossAnimator == null) return false;
+        foreach (AnimatorControllerParameter parameter in this.bossAnimator.parameters)
+            if (parameter.name == parameterName && parameter.type == type) return true;
+        return false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       
+        if (collision.CompareTag("PlayerAttackArea"))
+            this.TakeDamage(this.slashDamage);
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
-        damageTimer -= Time.deltaTime;
+        if (this.isDead || this.damageTimer > 0f || this.player == null) return;
+        if (!collision.transform.root.CompareTag("Player")) return;
+        this.player.Deduct(this.contactDamage);
+        this.damageTimer = this.damageInterval;
+    }
 
-        if (damageTimer <= 0)
+    private void ShotNormal()
+    {
+        if (this.player == null || this.bulletEnemy == null || this.firePos == null) return;
+        Vector3 directionToPlayer = (this.player.transform.position - this.firePos.position).normalized;
+        GameObject bullet = Instantiate(this.bulletEnemy, this.firePos.position, Quaternion.identity);
+        EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
+        if (enemyBullet == null) enemyBullet = bullet.AddComponent<EnemyBullet>();
+        AudioManagerr.Instance.PlaySFX("BossShoot");
+        enemyBullet.SetMovementDirection(directionToPlayer * this.bulletSpeedNormal);
+    }
+
+    private void ShotAround()
+    {
+        if (this.bulletEnemy == null || this.firePos == null) return;
+        float angleStep = 360f / Mathf.Max(1, this.bulletsAroundCount);
+        AudioManagerr.Instance.PlaySFX("BossShoot");
+        for (int i = 0; i < this.bulletsAroundCount; i++)
         {
-            if (collision.gameObject.CompareTag("Player"))
+            float angle = i * angleStep * Mathf.Deg2Rad;
+            Vector3 direction = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
+            GameObject bullet = Instantiate(this.bulletEnemy, this.firePos.position, Quaternion.identity);
+            EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
+            if (enemyBullet == null) enemyBullet = bullet.AddComponent<EnemyBullet>();
+            enemyBullet.SetMovementDirection(direction * this.bulletSpeedAround);
+        }
+    }
+
+    private void CreateMiniEnemy()
+    {
+        if (this.miniEmeny == null) return;
+
+        Vector3 spawnPosition = this.enemySpanwPos != null
+            ? this.enemySpanwPos.position
+            : this.transform.position;
+        GameObject spawnedEnemy = Instantiate(this.miniEmeny, spawnPosition, Quaternion.identity);
+        AudioManagerr.Instance.PlaySFX("CreateMini");
+        EnemyFollow enemyFollow = spawnedEnemy.GetComponentInChildren<EnemyFollow>();
+        if (enemyFollow != null) enemyFollow.SetAlwaysFollowPlayer(true);
+
+        EnemyMovement enemyMovement = spawnedEnemy.GetComponentInChildren<EnemyMovement>();
+        if (enemyMovement != null) enemyMovement.SetSpeed(5f);
+    }
+
+    private void Heal()
+    {
+        if (this.currentHealth == maxHealth)
+        {
+            return;
+        } 
+        healEffect.SetActive(true);
+        this.currentHealth = Mathf.Min(this.maxHealth, this.currentHealth + this.healAmount);
+        AudioManagerr.Instance.PlaySFX("HealBossLevel1");
+        if (this.hPSlider != null) this.hPSlider.value = this.currentHealth;
+        Invoke("SetAvtiveHealEffect", 0.5f);
+    }
+
+    private void SetAvtiveHealEffect()
+    {
+        healEffect.SetActive(false);
+    }
+
+    private IEnumerator RandomSkill()
+    {
+        while (!this.isDead)
+        {
+            yield return new WaitForSeconds(this.timeRandomSkill);
+            if (this.isDead || this.player == null) continue;
+            switch (Random.Range(0, 4))
             {
-                if (player != null)
-                {
-                    player.Deduct(dmgSender);
-                    damageTimer = damageInterval;
-                }
+                case 0:
+                    ShotNormal();
+                    break;
+                case 1:
+                    ShotAround();
+                    break;
+                case 2:
+                    CreateMiniEnemy();
+                    break;
+                case 3:                  
+                    Heal();
+                    break;
+                default:
+                    break;
             }
+        
         }
     }
 
-    //public override void Die()
-    //{
-    //    audioEffect.stopBossSound();
-    //    Instantiate(usbPrefabs, transform.position, Quaternion.identity);
-    //    base.Die();
-    //}
-
-    private void MoveToWardsPlayer()
-    {
-
-        if (player != null)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, 
-                player.transform.position, speed * Time.deltaTime);
-            FlipEnemy();
-        }
-    }
-    protected void FlipEnemy()
-    {
-        if (player != null)
-        {
-            if (transform.position.x < player.transform.position.x)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-            else if (transform.position.x > player.transform.position.x)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
-        }
-    }
-
-    private void shotNormal()
-    {
-        if (player != null)
-        {
-            Vector3 directionToPlayer = player.transform.position - firePos.position;
-            directionToPlayer.Normalize();
-            GameObject bullet = Instantiate(bulletEnemy, firePos.position, Quaternion.identity);
-            EnemyBullet enemyBullet = bullet.AddComponent<EnemyBullet>();
-            if (enemyBullet != null)
-            {
-                enemyBullet.setMovementDirection(directionToPlayer * bulletSpeedNormal);
-            }
-            else
-            {
-                Debug.LogError("Không tìm thấy EnemyBullet trong bullet prefab!");
-            }
-        }
-    }
-
-    private void shotAround()
-    {
-        const int countBuller = 12;
-        float angleStep = 360f / countBuller;
-        for (int i = 0; i < countBuller; i++)
-        {
-            float angle = i * angleStep;
-            Vector3 direction = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
-            GameObject bullet = Instantiate(bulletEnemy, firePos.position, Quaternion.identity);
-            EnemyBullet enemyBullet = bullet.AddComponent<EnemyBullet>();
-            enemyBullet.setMovementDirection(direction * bulletSpeedAround);
-
-        }
-    }
-
-    private void createMiniEnemy()
-    {
-        Instantiate(miniEmeny, transform.position, Quaternion.identity);
-    }
-
-    private void heal()
-    {
-        if (hPSlider.value < maxHP)
-        {
-            hPSlider.value += 5f; // Heal the boss by 1 when this enemy dies
-        }
-    }
-
-    private IEnumerator randomSkill()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(timeRandomSkill);
-            if (player != null)
-            {
-                int randomSkill = Random.Range(0, 4);
-
-                switch (randomSkill)
-                {
-                    case 0:
-                        shotNormal();
-                        break;
-                    case 1:
-                        shotAround();
-                        break;
-                    case 2:
-                        createMiniEnemy();
-                        break;
-                    case 3:
-                        heal();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
+    
 }

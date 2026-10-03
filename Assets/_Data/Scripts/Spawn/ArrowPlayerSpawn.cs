@@ -26,7 +26,6 @@ public class ArrowPlayerSpawn : Spawner
     {
         if (this.arrowSO != null) return;
         this.arrowSO = Resources.Load<ArrowSO>("GameData/ArrowSO");
-        Debug.Log(transform.name + ": LoadArrowSO", gameObject);
     }
     public void AddArrow(int count)
     {

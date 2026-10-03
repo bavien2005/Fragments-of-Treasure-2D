@@ -16,13 +16,11 @@ public class BossOpenDoor : DinoBehaviourScript
     {
         if (this.bossCtrl != null) return;
         this.bossCtrl = GetComponentInParent<BossCtrl>();
-        Debug.Log(transform.name + ": LoadBossCtrl", gameObject);
     }
     protected void LoadSceneTrans()
     {
         if (this.sceneTrans != null) return;
         this.sceneTrans = GameObject.Find("SceneTransition_1").transform;
-        Debug.Log(transform.name + ": LoadSceneTrans", gameObject);
     }
     protected void Update()
     {

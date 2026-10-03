@@ -25,21 +25,18 @@ public class BossAttack3 : DinoBehaviourScript
     {
         if (this.bossAttackCtrl != null) return;
         this.bossAttackCtrl = GetComponentInParent<BossAttackCtrl>();
-        Debug.Log(transform.name + ": LoadBossAttackCtrl", gameObject);
     }
 
     protected void LoadCollider()
     {
         if (this.collide != null) return;
         this.collide = GetComponent<CapsuleCollider2D>();
-        Debug.Log(transform.name + ": LoadCollider", gameObject);
     }
 
     protected void LoadLineRenderer()
     {
         if (this.lineRenderer != null) return;
         this.lineRenderer = GetComponentInChildren<LineRenderer>();
-        Debug.Log(transform.name + ": LoadLineRenderer", gameObject);
     }
 
     public void Attacking3()

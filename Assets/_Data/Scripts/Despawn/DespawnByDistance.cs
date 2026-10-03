@@ -17,7 +17,6 @@ public abstract class DespawnByDistance : Despawn
     {
         if (this.mainCam != null) return;
         this.mainCam = FindAnyObjectByType<Camera>();
-        Debug.Log(transform.name + ": LoadCamera", gameObject);
     }
 
     protected override bool CanDespawn()

@@ -6,8 +6,21 @@ public class EnemySpawnRandom : DinoBehaviourScript
 {
     [Header("Enemy Spawn Random")]
     [SerializeField] protected EnemySpawnCtrl enemySpawnCtrl;
-    [SerializeField] protected float delaySpawnTime = 3f;
+    [SerializeField, Min(0f)] protected float delaySpawnTime = 3f;
     [SerializeField] protected float spawnTimer = 0f;
+    [Header("Dark Forest boss gate")]
+    [SerializeField] protected GameObject bossToUnlock;
+    [SerializeField, Min(0f)] protected float bossRevealDelay = 1.5f;
+    protected int livingWaveEnemies;
+    protected float clearTimer;
+    public bool bossReleased;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (this.bossToUnlock != null)
+            this.bossToUnlock.SetActive(false);
+    }
     protected override void LoadComponent()
     {
         base.LoadComponent();
@@ -17,11 +30,11 @@ public class EnemySpawnRandom : DinoBehaviourScript
     {
         if (this.enemySpawnCtrl != null) return;
         this.enemySpawnCtrl = GetComponent<EnemySpawnCtrl>();
-        Debug.Log(transform.name + ": LoadEnemySpawnCtrl", gameObject);
     }
     protected void Update()
     {
         this.EnemySpawning();
+        this.CheckWaveCleared();
     }
     protected void EnemySpawning()
     {
@@ -36,7 +49,41 @@ public class EnemySpawnRandom : DinoBehaviourScript
         Quaternion spawPointRot = spawnPoint.rotation;
         Transform enemy = this.enemySpawnCtrl.EnemySpawn.GetRandomPrefab();
         Transform newEnemy = this.enemySpawnCtrl.EnemySpawn.Spawn(enemy, spawnPointPos, spawPointRot);
+        if (newEnemy == null) return;
         newEnemy.gameObject.SetActive(true);
+        EnemyDamReceive damageReceiver = newEnemy.GetComponentInChildren<EnemyDamReceive>();
+        if (damageReceiver == null)
+        {
+            Debug.LogError($"Spawned enemy '{newEnemy.name}' has no EnemyDamReceive; boss gate cannot track the wave.", newEnemy);
+            return;
+        }
+        damageReceiver.Died += this.OnWaveEnemyDied;
+        this.livingWaveEnemies++;
+    }
+
+    protected void OnWaveEnemyDied(EnemyDamReceive enemy)
+    {
+        enemy.Died -= this.OnWaveEnemyDied;
+        this.livingWaveEnemies = Mathf.Max(0, this.livingWaveEnemies - 1);
+        this.CheckWaveCleared();
+    }
+
+    protected void CheckWaveCleared()
+    {
+        if (this.bossReleased || this.bossToUnlock == null) return;
+
+        if (this.enemySpawnCtrl.EnemySpawn.SpawnCount > 0 || this.livingWaveEnemies > 0)
+        {
+            this.clearTimer = 0f;
+            return;
+        }
+
+        this.clearTimer += Time.deltaTime;
+        if (this.clearTimer < this.bossRevealDelay) return;
+
+        this.bossReleased = true;
+        this.bossToUnlock.SetActive(true);
+        Debug.Log("Enemy wave cleared: releasing the Dark Forest boss.", this.bossToUnlock);
     }
 
     protected bool RandomSpawnLimit()

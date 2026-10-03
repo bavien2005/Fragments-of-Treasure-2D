@@ -31,7 +31,6 @@ public class RestartToggle : BaseToggle
     {
         if (this.restartMenu != null) return;
         this.restartMenu = GameObject.Find("RestartMenu").transform;
-        Debug.Log(transform.name + ": LoadRestartMenu", gameObject);
     }
 
     public void RestartGameMenu()

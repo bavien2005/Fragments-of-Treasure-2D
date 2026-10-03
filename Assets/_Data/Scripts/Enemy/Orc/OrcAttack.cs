@@ -25,7 +25,6 @@ public class OrcAttack : EnemyAttack
     {
         if (this.enemyDamSender != null) return;
         this.enemyDamSender = transform.parent.Find("EnemyDamSender");
-        Debug.Log(transform.name + ": LoadEnemyDamSender", gameObject);
     }
     protected override void Attack()
     {

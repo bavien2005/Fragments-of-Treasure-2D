@@ -20,7 +20,6 @@ public class BossAttack : DinoBehaviourScript
     {
         if (this.bossAttackCtrl != null) return;
         this.bossAttackCtrl = GetComponent<BossAttackCtrl>();
-        Debug.Log(transform.name + ": LoadBossAttackCtrl", gameObject);
     }
 
     protected void FixedUpdate()

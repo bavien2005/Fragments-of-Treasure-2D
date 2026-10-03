@@ -19,7 +19,6 @@ public abstract class BaseButton : DinoBehaviourScript
     {
         if (this.button != null) return;
         this.button = GetComponent<Button>();
-        Debug.Log(transform.name + ": LoadButton", gameObject);
     }
     protected void AddOnClickEvent()
     {

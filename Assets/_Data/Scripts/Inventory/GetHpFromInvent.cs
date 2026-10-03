@@ -15,7 +15,6 @@ public class GetHpFromInvent : GetItemFromInvent
     {
         if (this.hpPotionSO != null) return;
         this.hpPotionSO = Resources.Load<HpPotionSO>("GameData/HpPotionSO");
-        Debug.Log(transform.name + ": LoadHpPotionSO", gameObject);
     }
     protected override void GetItemInventory()
     {

@@ -18,6 +18,5 @@ public class PlayerDamSender : DamageSender
         if (this.collide != null) return;
         this.collide = GetComponent<PolygonCollider2D>();
         this.collide.isTrigger = true;
-        Debug.Log(transform.name + ": LoadCollider", gameObject);
     }
 }

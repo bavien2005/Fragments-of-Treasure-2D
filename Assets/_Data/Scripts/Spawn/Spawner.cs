@@ -36,7 +36,6 @@ public abstract class Spawner : DinoBehaviourScript
     {
         if (this.holder != null) return;
         this.holder = transform.Find("Holder");
-        Debug.Log(transform.name + ": LoadHolder", gameObject);
     }
     protected Transform GetPrefabByName(string prefabName)
     {
@@ -65,7 +64,6 @@ public abstract class Spawner : DinoBehaviourScript
         Transform prefab = this.GetPrefabByName(prefabName);
         if (prefab == null)
         {
-            Debug.Log("Not exist prefab has name :" + prefabName);
             return null;
         }
         return Spawn(prefab, spawnPos, spawnRot);

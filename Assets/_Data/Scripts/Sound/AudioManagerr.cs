@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class AudioManagerr : DinoBehaviourScript
@@ -16,12 +17,18 @@ public class AudioManagerr : DinoBehaviourScript
     {
         base.Start();
         this.ClockMusic();
+        if (SceneManager.GetActiveScene().name == "InsideCave")
+        {
+            OpenMusic();
+            PlayMusic("MusicInsideCave");
+        }
     }
     protected override void Awake()
     {
         base.Awake();
         if (AudioManagerr.instance != null) Debug.LogWarning("Only 1 AudioManagerr allow to exist");
         AudioManagerr.instance = this;
+        
     }
     public void ClockMusic()
     {
